@@ -12,7 +12,7 @@ wifi:
 # Packages
 packages:
   setup:
-    url: https://github.com/jtenniswood/esphome-lvgl/
+    url: https://github.com/AleksanderJalo/ESP32Ekran/
     files: [device/esp32-s3-touch-lcd-7.yaml,
             addon/backlight.yaml,
             addon/network.yaml,
