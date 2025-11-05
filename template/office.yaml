@@ -1,8 +1,7 @@
 # ESP32-S3-Touch-LCD-7
 substitutions:
-  name: "your-device-name"
-  friendly_name: "Your Room Sensor"
-  room: "Your Room"
+  name: olek-projekt-ekran
+  friendly_name: OLEK-Projekt-EKRAN
 
 # Wifi Setup
 wifi:
