@@ -110,8 +110,8 @@ display:
     color_order: RGB
     pclk_frequency: 16MHZ
     dimensions:
-      width: 1024
-      height: 600
+      width: 800
+      height: 480
     de_pin:
       number: 5
     hsync_pin:
