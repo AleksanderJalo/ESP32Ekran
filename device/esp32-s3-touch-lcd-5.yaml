@@ -1,7 +1,7 @@
 # Waveshare ESP32-S3 Touch LCD 5" (B) - 1024x600 / GT911 / CH422G
 substitutions:
   name: "ws-esp32s3-5b"
-  friendly_name: "Panel 5\" Waveshare"
+  friendly_name: 'Panel 5" Waveshare'
   room: "Salon"
   project: "waveshare.esp32s3-5b"
   version: "1.0.0"
@@ -62,27 +62,31 @@ ota:
 # Ekspander IO CH422G (RESET/DISP dla LCD, RST dla touch)
 i2c:
   id: bus_a
-  sda: GPIO08        # TP_SDA (GT911) - wspólna magistrala
-  scl: GPIO09        # TP_SCL (GT911)
+  sda: GPIO08 # TP_SDA (GT911) - wspólna magistrala
+  scl: GPIO09 # TP_SCL (GT911)
   scan: true
 
 ch422g:
   - id: ch422g_hub
     # address: 0x24   # często 0x24; jeśli skan I²C nie znajdzie, skomentuj tę linię
 
-enable_pin:
+disp_pin:
   ch422g: ch422g_hub
   number: 2
   mode: OUTPUT
 
-  switch:
-  - platform: gpio
+output:
+  - platform: ledc
+    id: backlight_pwm
+    pin: GPIO6
+    frequency: 20000 Hz   # bez piszczenia LED
+
+light:
+  - platform: monochromatic
+    name: "Podświetlenie LCD"
+    output: backlight_pwm
     id: backlight
-    pin:
-      ch422g: ch422g_hub
-      number: 2
-    restore_mode: ALWAYS_ON
-    internal: true
+
 
 # Ekran RGB 1024x600 (RPI_DPI_RGB)
 display:
@@ -102,46 +106,46 @@ display:
 
     # Piny synchronizacji i zegara (wg Waveshare Pinouts)
     hsync_pin:
-      number: 46     # HSYNC
+      number: 46 # HSYNC
       ignore_strapping_warning: true
     vsync_pin:
-      number: 3      # VSYNC
+      number: 3 # VSYNC
       ignore_strapping_warning: true
     de_pin:
-      number: 5      # DE
-    pclk_pin: 7      # PCLK
+      number: 5 # DE
+    pclk_pin: 7 # PCLK
 
     # Reset i włączenie LCD przez CH422G
     reset_pin:
       ch422g: ch422g_hub
-      number: 3      # EXIO3 -> LCD_RST (wg Pinouts)
+      number: 3 # EXIO3 -> LCD_RST (wg Pinouts)
       mode: OUTPUT
     enable_pin:
       ch422g: ch422g_hub
-      number: 2      # EXIO2 -> DISP (Display Enable)
+      number: 2 # EXIO2 -> DISP (Display Enable)
       mode: OUTPUT
 
     # Linie danych RGB (wg Pinouts: R3..R7, G2..G7, B3..B7)
     data_pins:
       red:
-        - 1          # R3 (GPIO1)
-        - 2          # R4 (GPIO2)
-        - 42         # R5 (GPIO42)
-        - 41         # R6 (GPIO41)
-        - 40         # R7 (GPIO40)
+        - 1 # R3 (GPIO1)
+        - 2 # R4 (GPIO2)
+        - 42 # R5 (GPIO42)
+        - 41 # R6 (GPIO41)
+        - 40 # R7 (GPIO40)
       green:
-        - 39         # G2 (GPIO39)
-        - 0          # G3 (GPIO0)
-        - 45         # G4 (GPIO45)
-        - 48         # G5 (GPIO48)
-        - 47         # G6 (GPIO47)
-        - 21         # G7 (GPIO21)
+        - 39 # G2 (GPIO39)
+        - 0 # G3 (GPIO0)
+        - 45 # G4 (GPIO45)
+        - 48 # G5 (GPIO48)
+        - 47 # G6 (GPIO47)
+        - 21 # G7 (GPIO21)
       blue:
-        - 14         # B3 (GPIO14)
-        - 38         # B4 (GPIO38)
-        - 18         # B5 (GPIO18)
-        - 17         # B6 (GPIO17)
-        - 10         # B7 (GPIO10)
+        - 14 # B3 (GPIO14)
+        - 38 # B4 (GPIO38)
+        - 18 # B5 (GPIO18)
+        - 17 # B6 (GPIO17)
+        - 10 # B7 (GPIO10)
 
     # Timingi startowe – dla 1024x600 często działają okolice tych wartości
     # Jeśli obraz jest przesunięty/drży, koryguj kolejno: hsync_* potem vsync_*, na końcu pclk.
@@ -156,11 +160,11 @@ display:
 touchscreen:
   platform: gt911
   id: my_touch
-  address: 0x5D          # GT911 typowo 0x5D; jeśli skan pokaże 0x14/0x5D — dopasuj
-  interrupt_pin: GPIO4    # TP_IRQ
+  address: 0x5D # GT911 typowo 0x5D; jeśli skan pokaże 0x14/0x5D — dopasuj
+  interrupt_pin: GPIO4 # TP_IRQ
   reset_pin:
     ch422g: ch422g_hub
-    number: 1            # EXIO1 -> TP_RST (wg Pinouts)
+    number: 1 # EXIO1 -> TP_RST (wg Pinouts)
     mode: OUTPUT
   on_touch:
     - lambda: |-
