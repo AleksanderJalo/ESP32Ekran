@@ -72,13 +72,13 @@ ch422g:
   - id: ch422g_hub
     # address: 0x24   # często 0x24; jeśli skan I²C nie znajdzie, skomentuj tę linię
 
-enable_pin:
+
 disp_pin:
 
 output:
   - platform: gpio
     id: lcd_disp_enable
-    pin:
+    p
       ch422g: ch422g_hub
       number: 2
 
@@ -88,6 +88,7 @@ light:
     output: backlight_pwm
     id: backlight
 
+
 # Ekran RGB 1024x600 (RPI_DPI_RGB)
 display:
   - platform: rpi_dpi_rgb
@@ -95,6 +96,7 @@ display:
     update_interval: never
     auto_clear_enabled: false
     color_order: RGB
+    enable_pin:
 
     # 1024x600 @ ~16 MHz (punkty startowe; w razie artefaktów skoryguj)
     pclk_frequency: 16MHz
