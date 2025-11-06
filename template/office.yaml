@@ -54,11 +54,15 @@ wifi:
   password: !secret wifi_password
 
 logger:
-
+  level: DEBUG
 api:
 
 ota:
-  platform: esphome
+  - platform: esphome
+    password: "a3c402640b526a6167b3042bc072a913"
+
+web_server:
+  port: 80    
 
 # Ekspander IO CH422G (RESET/DISP dla LCD, RST dla touch)
 i2c:
@@ -80,7 +84,7 @@ display:
     color_order: RGB
 
     # 1024x600 @ ~16 MHz (punkty startowe; w razie artefaktów skoryguj)
-    pclk_frequency: 16MHz
+    pclk_frequency: 20MHz
     pclk_inverted: true
 
     dimensions:
