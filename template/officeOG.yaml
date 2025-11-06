@@ -1,0 +1,24 @@
+# ESP32-S3-Touch-LCD-7
+substitutions:
+  name: olek-projekt-ekran
+  friendly_name: OLEK-Projekt-EKRAN
+
+# Wifi Setup
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+
+# Packages
+packages:
+  setup:
+    url: https://github.com/AleksanderJalo/ESP32Ekran/
+    files: [device/esp32-s3-touch-lcd-5.yaml,
+            addon/backlight.yaml,
+            addon/network.yaml,
+            assets/fonts.yaml,
+            assets/icons.yaml,
+            theme/button.yaml,
+            office/sensors.yaml,
+            office/lvgl.yaml]
+    refresh: 1sec
