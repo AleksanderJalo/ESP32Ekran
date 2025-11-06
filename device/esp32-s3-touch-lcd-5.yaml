@@ -76,16 +76,18 @@ ch422g:
 disp_pin:
 
 output:
-  - platform: gpio
-    id: lcd_disp_enablep
-      ch422g: ch422g_hub
-      number: 2
+  - platform: ledc
+    id: backlight_pwm
+    pin: GPIO6
+    frequency: 20000 Hz
 
 light:
   - platform: monochromatic
-    name: "Podświetlenie LCD"
-    output: backlight_pwm
     id: backlight
+    name: "LCD Backlight"
+    output: backlight_pwm
+    default_transition_length: 0.5s
+
 
 
 # Ekran RGB 1024x600 (RPI_DPI_RGB)
