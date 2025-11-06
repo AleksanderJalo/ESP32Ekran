@@ -77,8 +77,7 @@ disp_pin:
 
 output:
   - platform: gpio
-    id: lcd_disp_enable
-    p
+    id: lcd_disp_enablep
       ch422g: ch422g_hub
       number: 2
 
@@ -96,7 +95,7 @@ display:
     update_interval: never
     auto_clear_enabled: false
     color_order: RGB
-    enable_pin: null
+    
 
     # 1024x600 @ ~16 MHz (punkty startowe; w razie artefaktów skoryguj)
     pclk_frequency: 16MHz
