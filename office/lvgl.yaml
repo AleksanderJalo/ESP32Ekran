@@ -42,7 +42,7 @@ lvgl:
         - button: 
             height: $button_height_single
             width: $button_width
-            checkable: false
+            checkable: true
             id: office_scene_features_button
             styles: control
             widgets:
@@ -65,7 +65,7 @@ lvgl:
         - button: 
             height: $button_height_single
             width: $button_width
-            checkable: false
+            checkable: true
             id: office_scene_calls_button
             styles: control
             widgets:
@@ -88,7 +88,7 @@ lvgl:
         - button: 
             height: $button_height_single
             width: $button_width
-            checkable: false
+            checkable: true
             id: office_scene_evening_button
             styles: control
             widgets:
@@ -111,7 +111,7 @@ lvgl:
         - button: 
             height: $button_height_single
             width: $button_width
-            checkable: false
+            checkable: true
             id: office_scene_dimmed_button
             styles: control
             widgets:
