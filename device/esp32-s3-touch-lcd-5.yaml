@@ -59,6 +59,13 @@ api:
 ota:
   platform: esphome
 
+
+on_boot:
+  priority: 800
+  then:
+    - output.turn_on: lcd_disp_enable
+      
+
 # Ekspander IO CH422G (RESET/DISP dla LCD, RST dla touch)
 i2c:
   id: bus_a
@@ -70,23 +77,21 @@ ch422g:
   - id: ch422g_hub
     # address: 0x24   # często 0x24; jeśli skan I²C nie znajdzie, skomentuj tę linię
 
+enable_pin:
 disp_pin:
-  ch422g: ch422g_hub
-  number: 2
-  mode: OUTPUT
 
 output:
-  - platform: ledc
-    id: backlight_pwm
-    pin: GPIO6
-    frequency: 20000 Hz   # bez piszczenia LED
+  - platform: gpio
+    id: lcd_disp_enable
+    pin:
+      ch422g: ch422g_hub
+      number: 2
 
 light:
   - platform: monochromatic
     name: "Podświetlenie LCD"
     output: backlight_pwm
     id: backlight
-
 
 # Ekran RGB 1024x600 (RPI_DPI_RGB)
 display:
