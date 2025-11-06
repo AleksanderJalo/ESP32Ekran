@@ -60,11 +60,6 @@ ota:
   platform: esphome
 
 
-on_boot:
-  priority: 800
-  then:
-    - output.turn_on: lcd_disp_enable
-      
 
 # Ekspander IO CH422G (RESET/DISP dla LCD, RST dla touch)
 i2c:
